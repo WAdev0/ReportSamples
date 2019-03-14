@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">5</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">5</property>
+        </structure>
+        <structure>
+            <property name="name">rowFetchSize</property>
+            <property name="id">5</property>
+        </structure>
+    </list-property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="dbSchema" id="37">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="4">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">oracle.jdbc.OracleDriver</property>
+            <property name="odaURL">&lt;url></property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="5">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">PROPERTY_NAME</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROPERTY_NAME</text-property>
+                    <text-property name="heading">PROPERTY_NAME</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROPERTY_VALUE</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">PROPERTY_VALUE</text-property>
+                    <text-property name="heading">PROPERTY_VALUE</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">PROPERTY_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">PROPERTY_VALUE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[this.queryText = this.queryText.replace('DBSCHEMA',params["dbSchema"].value +'.PROPERTIES_V');]]></method>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">PROPERTY_NAME</property>
+                    <property name="nativeName">PROPERTY_NAME</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">PROPERTY_VALUE</property>
+                    <property name="nativeName">PROPERTY_VALUE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT * FROM DBSCHEMA ORDER BY PROPERTY_NAME]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2"/>
+    </page-setup>
+    <body>
+        <grid id="6">
+            <column id="7"/>
+            <column id="8"/>
+            <row id="9">
+                <cell id="10">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <text id="31">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">18pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="color">#0000A0</property>
+                        <property name="marginTop">20pt</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content" key="report_title"><![CDATA[Global options (optman ls)]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="32">
+                <cell id="33">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <text id="35">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="color">#0000A0</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="12">
+                <cell id="13"/>
+                <cell id="14"/>
+            </row>
+        </grid>
+        <table id="15">
+            <property name="marginLeft">15pt</property>
+            <property name="marginRight">15pt</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">PROPERTY_NAME</property>
+                    <text-property name="displayName">PROPERTY_NAME</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROPERTY_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROPERTY_VALUE</property>
+                    <text-property name="displayName">PROPERTY_VALUE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROPERTY_VALUE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="29"/>
+            <column id="30"/>
+            <header>
+                <row id="16">
+                    <property name="backgroundColor">#0000A0</property>
+                    <property name="fontFamily">"Arial"</property>
+                    <property name="fontSize">18pt</property>
+                    <property name="color">white</property>
+                    <cell id="17">
+                        <label id="18">
+                            <property name="fontSize">14pt</property>
+                            <property name="marginTop">3pt</property>
+                            <property name="marginBottom">3pt</property>
+                            <text-property name="text" key="property_name">Property name</text-property>
+                        </label>
+                    </cell>
+                    <cell id="19">
+                        <label id="20">
+                            <property name="fontSize">14pt</property>
+                            <property name="marginTop">3pt</property>
+                            <property name="marginLeft">0pt</property>
+                            <property name="marginBottom">3pt</property>
+                            <text-property name="text" key="property_value">Property value</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="21">
+                    <property name="fontFamily">"Arial"</property>
+                    <list-property name="highlightRules">
+                        <structure>
+                            <property name="operator">eq</property>
+                            <property name="backgroundColor">#EFEFEF</property>
+                            <expression name="testExpr" type="javascript">BirtMath.mod(row.__rownum,2)</expression>
+                            <simple-property-list name="value1">
+                                <value type="javascript">0</value>
+                            </simple-property-list>
+                        </structure>
+                    </list-property>
+                    <cell id="22">
+                        <data id="23">
+                            <property name="marginTop">3pt</property>
+                            <property name="marginBottom">3pt</property>
+                            <property name="resultSetColumn">PROPERTY_NAME</property>
+                        </data>
+                    </cell>
+                    <cell id="24">
+                        <data id="25">
+                            <property name="marginTop">3pt</property>
+                            <property name="marginBottom">3pt</property>
+                            <property name="resultSetColumn">PROPERTY_VALUE</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="26">
+                    <cell id="27"/>
+                    <cell id="28"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>
