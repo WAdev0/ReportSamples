@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <list-property name="propertyBindings">
+        <structure>
+            <property name="name">queryText</property>
+            <property name="id">5</property>
+        </structure>
+        <structure>
+            <property name="name">queryTimeOut</property>
+            <property name="id">5</property>
+        </structure>
+        <structure>
+            <property name="name">rowFetchSize</property>
+            <property name="id">5</property>
+        </structure>
+    </list-property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="4">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">com.ibm.db2.jcc.DB2Driver</property>
+            <property name="odaURL">jdbc:db2://10.14.36.102:50000/TWS</property>
+            <property name="odaUser">db2admin</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">bWp1VDkxaWs=</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="5">
+            <property name="nullsOrdering">nulls lowest</property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">YEAR</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">YEAR</text-property>
+                    <text-property name="heading">YEAR</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MONTH</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">MONTH</text-property>
+                    <text-property name="heading">MONTH</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">JOB</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">JOB</text-property>
+                    <text-property name="heading">JOB</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">RUNS</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">RUNS</text-property>
+                    <text-property name="heading">RUNS</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">YEAR</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">MONTH</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">JOB</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">RUNS</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">YEAR</property>
+                    <property name="nativeName">YEAR</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">MONTH</property>
+                    <property name="nativeName">MONTH</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">JOB</property>
+                    <property name="nativeName">JOB</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">RUNS</property>
+                    <property name="nativeName">RUNS</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[SELECT
+  YEAR(JOB_RUN_DATE_TIME) AS YEAR,
+  MONTH(JOB_RUN_DATE_TIME) AS MONTH,
+  WORKSTATION_NAME || '#' || JOB_NAME AS JOB,
+  COUNT(*) AS RUNS
+FROM MDL.JOB_HISTORY_V
+GROUP BY
+  WORKSTATION_NAME,
+  JOB_NAME,
+  YEAR(JOB_RUN_DATE_TIME),
+  MONTH(JOB_RUN_DATE_TIME)
+  ORDER BY YEAR DESC,MONTH DESC, RUNS DESC]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2"/>
+    </page-setup>
+    <body>
+        <data id="204"/>
+        <grid id="6">
+            <column id="7"/>
+            <column id="8"/>
+            <row id="9">
+                <cell id="10">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <text id="31">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">18pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="color">#004080</property>
+                        <property name="marginTop">20pt</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content" key="report_title"><![CDATA[Job runs per month]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="32">
+                <cell id="33">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <text id="35">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="color">#004080</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                    </text>
+                    <table id="68">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="width">7.875in</property>
+                        <property name="dataSet">Data Set</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">YEAR</property>
+                                <text-property name="displayName">YEAR</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["YEAR"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MONTH</property>
+                                <text-property name="displayName">MONTH</text-property>
+                                <expression name="expression" type="javascript">if (dataSetRow["MONTH"] ==12)&#13;
+"December"&#13;
+if (dataSetRow["MONTH"] ==11)&#13;
+"November"&#13;
+if (dataSetRow["MONTH"] ==10)&#13;
+"October"&#13;
+if (dataSetRow["MONTH"] ==9)&#13;
+"September"&#13;
+if (dataSetRow["MONTH"] ==8)&#13;
+"August"&#13;
+if (dataSetRow["MONTH"] ==7)&#13;
+"July"&#13;
+if (dataSetRow["MONTH"] ==6)&#13;
+"June"&#13;
+if (dataSetRow["MONTH"] ==5)&#13;
+"May"&#13;
+if (dataSetRow["MONTH"] ==4)&#13;
+"April"&#13;
+if (dataSetRow["MONTH"] ==3)&#13;
+"March"&#13;
+if (dataSetRow["MONTH"] ==2)&#13;
+"February"&#13;
+if (dataSetRow["MONTH"] ==1)&#13;
+"January"</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">JOB</property>
+                                <text-property name="displayName">JOB</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["JOB"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">RUNS</property>
+                                <text-property name="displayName">RUNS</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["RUNS"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Column Binding</property>
+                                <expression name="expression" type="javascript">Total.sum(dataSetRow["RUNS"])</expression>
+                                <property name="dataType">integer</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation</property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>GroupByMonth</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">dataSetRow["RUNS"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation_1</property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>GroupByYear</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">dataSetRow["RUNS"]</expression>
+                                    </structure>
+                                </list-property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <column id="92">
+                            <property name="width">3px</property>
+                        </column>
+                        <column id="93">
+                            <property name="width">2px</property>
+                        </column>
+                        <column id="94"/>
+                        <column id="95"/>
+                        <column id="127">
+                            <property name="width">2px</property>
+                        </column>
+                        <column id="135">
+                            <property name="width">2px</property>
+                        </column>
+                        <header>
+                            <row id="69">
+                                <property name="fontWeight">bold</property>
+                                <property name="color">#FFFFFF</property>
+                                <cell id="70"/>
+                                <cell id="72"/>
+                                <cell id="74"/>
+                                <cell id="76"/>
+                                <cell id="120"/>
+                                <cell id="128"/>
+                            </row>
+                        </header>
+                        <group id="96">
+                            <property name="groupName">GroupByYear</property>
+                            <expression name="keyExpr" type="javascript">row["YEAR"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["YEAR"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="97">
+                                    <property name="backgroundColor">#7E90BF</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="color">#FFFFFF</property>
+                                    <cell id="98">
+                                        <property name="colSpan">1</property>
+                                        <property name="rowSpan">1</property>
+                                    </cell>
+                                    <cell id="223">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <data id="107">
+                                            <property name="color">#FFFFFF</property>
+                                            <property name="marginTop">2pt</property>
+                                            <property name="marginLeft">2pt</property>
+                                            <property name="marginBottom">2pt</property>
+                                            <property name="marginRight">2pt</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="display">inline</property>
+                                            <property name="resultSetColumn">YEAR</property>
+                                        </data>
+                                        <label id="222">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#FFFFFF</property>
+                                            <property name="display">inline</property>
+                                            <text-property name="text">total runs</text-property>
+                                        </label>
+                                        <data id="221">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#FFFFFF</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="display">inline</property>
+                                            <property name="resultSetColumn">Aggregation_1</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="226"/>
+                                    <cell id="129"/>
+                                </row>
+                                <row id="136">
+                                    <property name="backgroundColor">#7E90BF</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="color">#FFFFFF</property>
+                                    <cell id="137"/>
+                                    <cell id="138"/>
+                                    <cell id="139"/>
+                                    <cell id="140"/>
+                                    <cell id="141"/>
+                                    <cell id="142"/>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="102">
+                                    <property name="backgroundColor">#7E90BF</property>
+                                    <cell id="103">
+                                        <property name="backgroundColor">#7E90BF</property>
+                                    </cell>
+                                    <cell id="104"/>
+                                    <cell id="105">
+                                        <property name="colSpan">3</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="verticalAlign">bottom</property>
+                                    </cell>
+                                    <cell id="133"/>
+                                </row>
+                                <row id="214">
+                                    <property name="backgroundColor">#7E90BF</property>
+                                    <cell id="215">
+                                        <property name="backgroundColor">#7E90BF</property>
+                                    </cell>
+                                    <cell id="216"/>
+                                    <cell id="217"/>
+                                    <cell id="218"/>
+                                    <cell id="219"/>
+                                    <cell id="220"/>
+                                </row>
+                            </footer>
+                        </group>
+                        <group id="108">
+                            <property name="groupName">GroupByMonth</property>
+                            <expression name="keyExpr" type="javascript">row["MONTH"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["MONTH"]</expression>
+                            </structure>
+                            <property name="hideDetail">false</property>
+                            <header>
+                                <row id="165">
+                                    <property name="backgroundColor">#E6E6FF</property>
+                                    <cell id="166">
+                                        <property name="backgroundColor">#7E90BF</property>
+                                    </cell>
+                                    <cell id="167">
+                                        <property name="colSpan">1</property>
+                                        <property name="rowSpan">1</property>
+                                    </cell>
+                                    <cell id="227">
+                                        <property name="colSpan">2</property>
+                                        <property name="rowSpan">1</property>
+                                        <data id="119">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="paddingTop">2pt</property>
+                                            <property name="paddingLeft">2pt</property>
+                                            <property name="paddingBottom">2pt</property>
+                                            <property name="paddingRight">2pt</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="display">inline</property>
+                                            <property name="resultSetColumn">MONTH</property>
+                                        </data>
+                                        <label id="213">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#000000</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="whiteSpace">nowrap</property>
+                                            <property name="display">inline</property>
+                                            <text-property name="text">total runs</text-property>
+                                        </label>
+                                        <data id="205">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#000000</property>
+                                            <property name="paddingLeft">3pt</property>
+                                            <property name="paddingRight">3pt</property>
+                                            <property name="textAlign">right</property>
+                                            <property name="display">inline</property>
+                                            <property name="resultSetColumn">Aggregation</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="229"/>
+                                    <cell id="175">
+                                        <property name="backgroundColor">#7E90BF</property>
+                                    </cell>
+                                </row>
+                                <row id="109">
+                                    <cell id="110">
+                                        <property name="backgroundColor">#7E90BF</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="borderBottomStyle">none</property>
+                                        <property name="borderLeftStyle">none</property>
+                                        <property name="borderRightStyle">none</property>
+                                        <property name="borderTopStyle">none</property>
+                                    </cell>
+                                    <cell id="111">
+                                        <property name="backgroundColor">#E6E6FF</property>
+                                    </cell>
+                                    <cell id="112">
+                                        <property name="borderBottomColor">#004080</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <label id="75">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#004080</property>
+                                            <property name="borderBottomStyle">none</property>
+                                            <property name="borderLeftStyle">none</property>
+                                            <property name="borderRightStyle">none</property>
+                                            <property name="borderTopStyle">none</property>
+                                            <property name="paddingTop">2pt</property>
+                                            <property name="paddingLeft">3pt</property>
+                                            <property name="paddingBottom">2pt</property>
+                                            <property name="paddingRight">3pt</property>
+                                            <text-property name="text">Job</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="113">
+                                        <property name="borderBottomColor">#004080</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <label id="77">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="color">#004080</property>
+                                            <property name="paddingTop">1pt</property>
+                                            <property name="paddingLeft">3pt</property>
+                                            <property name="paddingBottom">1pt</property>
+                                            <property name="paddingRight">3pt</property>
+                                            <property name="textAlign">right</property>
+                                            <text-property name="text">Number of runs</text-property>
+                                        </label>
+                                    </cell>
+                                    <cell id="122">
+                                        <property name="backgroundColor">#E6E6FF</property>
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                    </cell>
+                                    <cell id="130">
+                                        <property name="backgroundColor">#7E90BF</property>
+                                    </cell>
+                                </row>
+                            </header>
+                            <footer>
+                                <row id="206">
+                                    <property name="backgroundColor">#E6E6FF</property>
+                                    <property name="height">2px</property>
+                                    <cell id="207">
+                                        <property name="backgroundColor">#7E90BF</property>
+                                    </cell>
+                                    <cell id="208">
+                                        <property name="backgroundColor">#E6E6FF</property>
+                                        <property name="paddingTop">2px</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                    </cell>
+                                    <cell id="209">
+                                        <property name="backgroundColor">#E6E6FF</property>
+                                    </cell>
+                                    <cell id="210"/>
+                                    <cell id="211"/>
+                                    <cell id="212">
+                                        <property name="backgroundColor">#7E90BF</property>
+                                    </cell>
+                                </row>
+                            </footer>
+                        </group>
+                        <detail>
+                            <row id="78">
+                                <cell id="79">
+                                    <property name="backgroundColor">#7E90BF</property>
+                                </cell>
+                                <cell id="81">
+                                    <property name="backgroundColor">#E6E6FF</property>
+                                </cell>
+                                <cell id="83">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <list-property name="highlightRules">
+                                        <structure>
+                                            <property name="operator">eq</property>
+                                            <property name="backgroundColor">#F8F8F8</property>
+                                            <expression name="testExpr" type="javascript">BirtMath.mod(row.__rownum,2)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">0</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                    <data id="84">
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">3pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">3pt</property>
+                                        <property name="whiteSpace">nowrap</property>
+                                        <property name="resultSetColumn">JOB</property>
+                                    </data>
+                                </cell>
+                                <cell id="85">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <list-property name="highlightRules">
+                                        <structure>
+                                            <property name="operator">eq</property>
+                                            <property name="backgroundColor">#F8F8F8</property>
+                                            <expression name="testExpr" type="javascript">BirtMath.mod(row.__rownum,2)</expression>
+                                            <simple-property-list name="value1">
+                                                <value type="javascript">0</value>
+                                            </simple-property-list>
+                                        </structure>
+                                    </list-property>
+                                    <data id="86">
+                                        <property name="paddingTop">1pt</property>
+                                        <property name="paddingLeft">3pt</property>
+                                        <property name="paddingBottom">1pt</property>
+                                        <property name="paddingRight">3pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="resultSetColumn">RUNS</property>
+                                    </data>
+                                </cell>
+                                <cell id="123">
+                                    <property name="backgroundColor">#E6E6FF</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                </cell>
+                                <cell id="131">
+                                    <property name="backgroundColor">#7E90BF</property>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="87">
+                                <cell id="88"/>
+                                <cell id="89"/>
+                                <cell id="90"/>
+                                <cell id="91"/>
+                                <cell id="126"/>
+                                <cell id="134"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+            <row id="12">
+                <cell id="13"/>
+                <cell id="14"/>
+            </row>
+        </grid>
+    </body>
+</report>
