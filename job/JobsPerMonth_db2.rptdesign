@@ -38,9 +38,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.ibm.db2.jcc.DB2Driver</property>
-            <property name="odaURL">jdbc:db2://10.14.36.102:50000/TWS</property>
-            <property name="odaUser">db2admin</property>
-            <encrypted-property name="odaPassword" encryptionID="base64">bWp1VDkxaWs=</encrypted-property>
+            <property name="odaURL"><odaurl></property>  
         </oda-data-source>
     </data-sources>
     <data-sets>
