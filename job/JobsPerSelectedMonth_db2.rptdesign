@@ -46,6 +46,53 @@
                 <property name="category">Unformatted</property>
             </structure>
         </scalar-parameter>
+        <scalar-parameter name="Year" id="267">
+            <text-property name="promptText">Select an year</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">2019</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">2018</property>
+                    <property name="label">2018</property>
+                </structure>
+                <structure>
+                    <property name="value">2019</property>
+                    <property name="label">2019</property>
+                </structure>
+                <structure>
+                    <property name="value">2020</property>
+                    <property name="label">2020</property>
+                </structure>
+                <structure>
+                    <property name="value">2021</property>
+                    <property name="label">2021</property>
+                </structure>
+                <structure>
+                    <property name="value">2022</property>
+                    <property name="label">2022</property>
+                </structure>
+                <structure>
+                    <property name="value">2023</property>
+                    <property name="label">2023</property>
+                </structure>
+                <structure>
+                    <property name="value">2024</property>
+                    <property name="label">2024</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">false</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
         <scalar-parameter name="Month" id="246">
             <text-property name="promptText">Select a month</text-property>
             <property name="valueType">static</property>
@@ -176,10 +223,26 @@
             </list-property>
             <list-property name="parameters">
                 <structure>
+                    <property name="name">year</property>
+                    <property name="paramName">Year</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">1</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
                     <property name="name">month</property>
                     <property name="paramName">Month</property>
+                    <property name="nativeName"></property>
                     <property name="dataType">integer</property>
-                    <property name="position">1</property>
+                    <property name="nativeDataType">4</property>
+                    <property name="position">2</property>
+                    <property name="isOptional">true</property>
+                    <property name="allowNull">true</property>
                     <property name="isInput">true</property>
                     <property name="isOutput">false</property>
                 </structure>
@@ -249,7 +312,7 @@
   MONTH(JOB_RUN_DATE_TIME) AS MONTH,
   WORKSTATION_NAME || '#' || JOB_NAME AS JOB,
   COUNT(*) AS RUNS
-FROM MDL.JOB_HISTORY_V where YEAR(JOB_RUN_DATE_TIME) = 2018 and MONTH(JOB_RUN_DATE_TIME)=? 
+FROM MDL.JOB_HISTORY_V where YEAR(JOB_RUN_DATE_TIME) = ? and MONTH(JOB_RUN_DATE_TIME)=? 
 GROUP BY
   WORKSTATION_NAME,
   JOB_NAME,
@@ -266,7 +329,7 @@ GROUP BY
         <design:attributes>
           <design:identifier>
             <design:name></design:name>
-            <design:position>1</design:position>
+            <design:position>2</design:position>
           </design:identifier>
           <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
           <design:precision>10</design:precision>
