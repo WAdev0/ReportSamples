@@ -20,6 +20,32 @@
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>
     <parameters>
+        <scalar-parameter name="Output" id="263">
+            <text-property name="helpText">Select the otput as table or chart</text-property>
+            <text-property name="promptText">Output format</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">chart</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">table</property>
+                    <property name="label">Table</property>
+                </structure>
+                <structure>
+                    <property name="value">chart</property>
+                    <property name="label">Chart</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">radio-button</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
         <scalar-parameter name="Month" id="246">
             <text-property name="promptText">Select a month</text-property>
             <property name="valueType">static</property>
@@ -103,7 +129,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.ibm.db2.jcc.DB2Driver</property>
-            <property name="odaURL">&lt;odaURL></property> 
+            <property name="odaURL">&lt;odaURL></property>
         </oda-data-source>
     </data-sources>
     <data-sets>
@@ -385,6 +411,60 @@ if (params["Month"].value ==1)&#13;
                 <cell id="251">
                     <property name="colSpan">2</property>
                     <property name="rowSpan">1</property>
+                    <property name="textAlign">center</property>
+                    <text id="265">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">16pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="color">#004080</property>
+                        <property name="display">inline</property>
+                        <property name="dataSet">Data Set</property>
+                        <list-property name="visibility">
+                            <structure>
+                                <property name="format">all</property>
+                                <expression name="valueExpr" type="javascript">row["TOTAL"] == null || params["Output"].value=="table"</expression>
+                            </structure>
+                        </list-property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">TOTAL</property>
+                                <text-property name="displayName">TOTAL</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["TOTAL"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Total runs]]></text-property>
+                    </text>
+                    <data id="266">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">16pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="color">#004080</property>
+                        <property name="display">inline</property>
+                        <property name="dataSet">Data Set</property>
+                        <list-property name="visibility">
+                            <structure>
+                                <property name="format">all</property>
+                                <expression name="valueExpr" type="javascript">params["Output"].value == "table"</expression>
+                            </structure>
+                        </list-property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">TOTAL</property>
+                                <text-property name="displayName">TOTAL</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["TOTAL"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Column Binding</property>
+                                <expression name="expression" type="javascript">dataSetRow["TOTAL"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Column Binding</property>
+                    </data>
                     <extended-item extensionName="Chart" name="Chart" id="256">
                         <xml-property name="xmlRepresentation"><![CDATA[<model:ChartWithAxes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:attribute="http://www.birt.eclipse.org/ChartModelAttribute" xmlns:data="http://www.birt.eclipse.org/ChartModelData" xmlns:layout="http://www.birt.eclipse.org/ChartModelLayout" xmlns:model="http://www.birt.eclipse.org/ChartModel" xmlns:type="http://www.birt.eclipse.org/ChartModelType">
   <Version>2.6.1</Version>
@@ -1521,7 +1601,7 @@ if (params["Month"].value ==1)&#13;
                         <list-property name="visibility">
                             <structure>
                                 <property name="format">all</property>
-                                <expression name="valueExpr" type="javascript">row.__rownum = 0</expression>
+                                <expression name="valueExpr" type="javascript">row.__rownum = 0 || params["Output"].value == "table"</expression>
                             </structure>
                         </list-property>
                         <list-property name="boundDataColumns">
@@ -1562,7 +1642,7 @@ if (params["Month"].value ==1)&#13;
                         <list-property name="visibility">
                             <structure>
                                 <property name="format">all</property>
-                                <expression name="valueExpr" type="javascript">row["Aggregation_1"]== null</expression>
+                                <expression name="valueExpr" type="javascript">row["Aggregation_1"]== null || params["Output"].value== "chart"</expression>
                             </structure>
                         </list-property>
                         <list-property name="boundDataColumns">
