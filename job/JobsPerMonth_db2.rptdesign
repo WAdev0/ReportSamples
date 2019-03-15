@@ -38,7 +38,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.ibm.db2.jcc.DB2Driver</property>
-            <property name="odaURL"><odaurl></property>  
+            <property name="odaURL">&lt;odaURL></property>  
         </oda-data-source>
     </data-sources>
     <data-sets>
