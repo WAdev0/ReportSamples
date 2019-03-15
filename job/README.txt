@@ -18,9 +18,19 @@
   ===============================================================================================================
   JobsPerSelectedMonth_db2.rptdesign
   ===============================================================================================================
-  Description: How many times each job ran in the selected month, the output can be Table or Chart 
-  Parameters:  Month, 
-               Output
+  Description: How many times each job ran in the selected year and month
+  Parameters:  Output,
+               Year, 
+               Month, 
+  Output    :  Table or Chart depending on Output parameter
+  Usage:       Import the .rptdesign file and configure to run on DWC engine
+  
+  ===============================================================================================================
+  JobsPerMonthInTheYear_db2.rptdesign
+  ===============================================================================================================
+  Description: How many jobs ran each month in the selected year
+  Parameters:  Output,
+               Year 
   Output    :  Table or Chart depending on Output parameter
   Usage:       Import the .rptdesign file and configure to run on DWC engine
   
